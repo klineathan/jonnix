@@ -59,11 +59,12 @@
   };
 
   home-manager = {
-    specialArgs = { inherit inputs; };
+    # Pass inputs to home-manager modules
+    extraSpecialArgs = { inherit inputs; };
     users = {
       "jon" = import ./home.nix;
-    }
-  }
+    };
+  };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
