@@ -1,6 +1,20 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
+  # Extend nixpkgs to include any custom inputs
+  nixpkgs = {
+    overlays = [
+      (final: prev: {
+        vimPlugins = prev.vimPlugins // {
+          catppuccin = prev.vimUtils.buildVimPlugin {
+            name = "catppuccin";
+            src = inputs.catppuccin;
+          };
+        };
+      })
+    ];
+  };
+
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "jon";
@@ -100,6 +114,11 @@
       {
         plugin = telescope-nvim;
         config = toLuaFile ./nvim/plugin/telescope.lua
+      }
+
+      {
+        plugin = catppuccin;
+        config = "colorscheme catppuccin_frappe"
       }
     ];
 

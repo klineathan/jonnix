@@ -8,6 +8,9 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    catpuccin.url = "github:catppuccin/vim";
+    catpuccin.flake = false;
   };
 
   outputs = { self, nixpkgs, ... }@inputs: {

@@ -2,5 +2,4 @@
 vim.g.mapleader = ','
 
 -- options
-
--- telescope
+vim.o.termguicolors = true --for catppuccin theme
