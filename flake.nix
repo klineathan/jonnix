@@ -9,8 +9,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    catpuccin.url = "github:catppuccin/vim";
-    catpuccin.flake = false;
+    catppuccin.url = "github:catppuccin/vim";
+    catppuccin.flake = false;
   };
 
   outputs = { self, nixpkgs, ... }@inputs: {

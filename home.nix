@@ -48,8 +48,6 @@
     # (pkgs.writeShellScriptBin "my-hello" ''
     #   echo "Hello, ${config.home.username}!"
     # '')
-    pkgs.neovim
-    pkgs.librewolf
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -113,12 +111,12 @@
     plugins = with pkgs.vimPlugins; [
       {
         plugin = telescope-nvim;
-        config = toLuaFile ./nvim/plugin/telescope.lua
+        config = toLuaFile ./nvim/plugin/telescope.lua;
       }
 
       {
         plugin = catppuccin;
-        config = "colorscheme catppuccin_frappe"
+        config = "colorscheme catppuccin_frappe";
       }
     ];
 
