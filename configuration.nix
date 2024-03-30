@@ -52,10 +52,6 @@
     password = "password";
     isNormalUser = true;
     extraGroups = [ "wheel" ];
-    packages = with pkgs; [
-        neovim
-        librewolf
-    ];
   };
 
   home-manager = {

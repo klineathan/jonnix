@@ -34,6 +34,8 @@
     # (pkgs.writeShellScriptBin "my-hello" ''
     #   echo "Hello, ${config.home.username}!"
     # '')
+    pkgs.neovim
+    pkgs.librewolf
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -72,4 +74,34 @@
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
+
+  programs.neovim =
+  let
+    # vim plugins only accept vimscript for configuring
+    # therefore, we have these helper functions to embed our lua code within vimscript for configuring plugins
+    toLua = str: "lua << EOF\n${str}\nEOF\n";
+    toLuaFile = file: "lua << EOF\n${builtins.readFile file}\nEOF\n";
+  in
+  {
+    # system settings
+    enable = true;
+
+    viAlias = true;
+    vimAlias = true;
+    vimdiffAlias = true;
+
+    # editor settings
+    extraLuaConfig = ''
+      ${builtins.readFile ./nvim/init.lua}
+    '';
+
+    # plugin settings
+    plugins = with pkgs.vimPlugins; [
+      {
+        plugin = telescope-nvim;
+        config = toLuaFile ./nvim/plugin/telescope.lua
+      }
+    ];
+
+  };
 }
